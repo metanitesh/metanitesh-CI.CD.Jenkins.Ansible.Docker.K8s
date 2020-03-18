@@ -2,8 +2,19 @@ pipeline {
   agent any
   stages {
     stage('Install packages') {
-      steps {
-        sh 'npm install'
+      parallel {
+        stage('Install packages') {
+          steps {
+            sh 'npm install'
+          }
+        }
+
+        stage('') {
+          steps {
+            echo 'hello'
+          }
+        }
+
       }
     }
 
@@ -15,7 +26,7 @@ pipeline {
 
     stage('Build container') {
       steps {
-        sh 'sudo docker build -t metanitesh/simple-api .'
+        sh 'echo building '
       }
     }
 
