@@ -1,7 +1,7 @@
 pipeline {
   environment {
     registry = "metanitesh/simple-api"
-    registryCredential = 'niteshdocker'
+    registryCredential = 'dockerId'
     dockerImage = ''
   }
   agent any
