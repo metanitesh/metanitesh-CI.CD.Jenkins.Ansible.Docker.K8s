@@ -26,7 +26,7 @@ pipeline {
 
     stage('Build') {
       steps {
-        sh 'docker.build(metanitesh/simple-api)'
+        sh 'docker.build("metanitesh/simple-api")'
       }
     }
 
