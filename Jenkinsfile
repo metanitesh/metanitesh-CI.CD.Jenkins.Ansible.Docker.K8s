@@ -9,7 +9,7 @@ pipeline {
           }
         }
 
-        stage('') {
+        stage('error') {
           steps {
             echo 'hello'
           }
@@ -26,7 +26,7 @@ pipeline {
 
     stage('Build container') {
       steps {
-        sh 'echo building '
+        sh 'docker build -t metanitesh/simple-api . '
       }
     }
 
