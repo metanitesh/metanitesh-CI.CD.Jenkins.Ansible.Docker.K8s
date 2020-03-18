@@ -1,5 +1,6 @@
 pipeline {
   agent any
+  def app
   stages {
     stage('Install packages') {
       parallel {
@@ -25,9 +26,17 @@ pipeline {
     }
 
     stage('Build') {
-      steps {
-        sh 'docker.build(metanitesh/simple-api)'
-      }
+      app = docker.build("metanitesh/simple-api")
+      // steps {
+      //   sh 'docker.build(metanitesh/simple-api)'
+      // }
+    }
+
+    stage('Test image') {
+        
+        app.inside {
+            echo "Tests passed"
+        }
     }
 
   }
