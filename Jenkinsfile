@@ -1,4 +1,9 @@
 pipeline {
+  environment {
+    registry = "metanitesh/simple-api"
+    registryCredential = 'niteshdocker'
+    dockerImage = ''
+  }
   agent any
   stages {
     stage('Install packages') {
@@ -26,13 +31,26 @@ pipeline {
 
     stage('Build') {
       steps {
-        sh 'docker build -t metanitesh/simple-api .'
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
       }
     }
 
     stage('Push') {
       steps {
-        sh 'docker push metanitesh/simple-api'
+        script {
+            docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
+        // sh 'docker push metanitesh/simple-api'
+      }
+    }
+
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
 
