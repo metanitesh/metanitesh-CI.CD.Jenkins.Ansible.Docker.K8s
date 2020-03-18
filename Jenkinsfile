@@ -13,5 +13,11 @@ pipeline {
       }
     }
 
+    stage('Build container') {
+      steps {
+        sh 'docker build -t metanitesh/simple-api .'
+      }
+    }
+
   }
 }
