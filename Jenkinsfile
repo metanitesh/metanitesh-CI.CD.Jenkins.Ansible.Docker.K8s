@@ -2,19 +2,8 @@ pipeline {
   agent any
   stages {
     stage('Install packages') {
-      parallel {
-        stage('Install packages') {
-          steps {
-            sh 'npm install'
-          }
-        }
-
-        stage('error') {
-          steps {
-            echo 'hello'
-          }
-        }
-
+      steps {
+        sh 'npm install'
       }
     }
 
@@ -24,17 +13,36 @@ pipeline {
       }
     }
 
-    stage('Build') {
+    stage('Build Docker Image') {
       steps {
-        sh 'docker build -t metanitesh/simple-api .'
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
+
       }
     }
 
-    stage('Push') {
+    stage('Push Docker Image') {
       steps {
-        sh 'docker push metanitesh/simple-api'
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
+
       }
     }
 
+    stage('Remove Unused docker image') {
+      steps {
+        sh "docker rmi $registry:$BUILD_NUMBER"
+      }
+    }
+
+  }
+  environment {
+    registry = 'metanitesh/simple-api'
+    registryCredential = 'dockerId'
+    dockerImage = ''
   }
 }
