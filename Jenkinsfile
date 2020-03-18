@@ -12,6 +12,7 @@ node {
          * docker build on the command line */
 
         app = docker.build("meatnitesh/simple-api")
+        app.push("latest")
     }
 
     stage('Test image') {
@@ -28,7 +29,7 @@ node {
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
-        docker.withRegistry('https://hub.docker.com', 'niteshdocker') {
+        docker.withRegistry('https://hub.docker.com/', 'niteshdocker') {
             app.push("latest")
         }
     }
