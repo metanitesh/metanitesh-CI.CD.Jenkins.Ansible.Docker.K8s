@@ -1,6 +1,5 @@
 pipeline {
   agent any
-  def app
   stages {
     stage('Install packages') {
       parallel {
