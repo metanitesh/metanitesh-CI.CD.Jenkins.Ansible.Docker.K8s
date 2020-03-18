@@ -2,8 +2,19 @@ pipeline {
   agent any
   stages {
     stage('Install packages') {
-      steps {
-        sh 'npm install'
+      parallel {
+        stage('Install packages') {
+          steps {
+            sh 'npm install'
+          }
+        }
+
+        stage('error') {
+          steps {
+            echo 'hello'
+          }
+        }
+
       }
     }
 
