@@ -1,5 +1,5 @@
 - name: ec2 laucher
-  hosts: localhost
+  hosts: launched
   become: true
   connection: local
   tasks:
@@ -25,7 +25,7 @@
     register: ec2
 
   - name: Add new instance to host group
-    add_host: hostname={{ item.public_ip }} groupname=launched
+    add_host: hostname={{ item.public_ip }} groupname=launched ansible_ssh_user=ubuntu ansible_ssh_private_key_file=~/.ssh/id_rsa
     with_items: '{{ec2.instances}}'
   
   - name: Wait for SSH to come up
@@ -36,6 +36,12 @@
   hosts: launched
   gather_facts: True
   tasks:
+  - name: git
+    yum: name=git state=present
+  
+  - name: git
+    yum: name=git state=present
+  
   - name: git
     yum: name=git state=present
   
