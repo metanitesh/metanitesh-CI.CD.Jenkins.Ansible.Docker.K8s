@@ -1,5 +1,5 @@
 - name: ec2 laucher
-  hosts: launched
+  hosts: localhost
   become: true
   connection: local
   tasks:
