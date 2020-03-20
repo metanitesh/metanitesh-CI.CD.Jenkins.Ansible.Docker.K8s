@@ -1,0 +1,19 @@
+apiVersion: 
+kind: Pod
+metadata:
+  name: simple-api-pod
+spec:
+  containers:
+  - image: metanitesh/simple-api
+    name: simple-api
+    imagePullPolicy: Always          
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "1024Mi"
+        cpu: "500m"       
+    ports:
+    - containerPort: 3000
+  restartPolicy: Always
