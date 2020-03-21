@@ -9,7 +9,7 @@
   - name: docker
     apt: name=docker.io state=present
   
-  - name: docker
+  - name: socat
     apt: name=socat state=present
   
   - name: insatll minikube
