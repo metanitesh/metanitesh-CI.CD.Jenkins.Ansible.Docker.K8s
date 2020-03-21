@@ -29,3 +29,8 @@
   
   - name: start cluster
     shell:  minikube start --vm-driver=none
+
+  - name: get nodes
+    shell: echo "node output `kubectl get nodes`"
+
+
