@@ -5,7 +5,7 @@
   tasks:
   - git:
       repo: https://github.com/metanitesh/metanitesh-CI.CD.Jenkins.Ansible.Docker.K8s.git
-      dest: /home/ubuntu
+      dest: /home/ubuntu/repo
       version: green-deployment
   
   - name: deploy a cluster
