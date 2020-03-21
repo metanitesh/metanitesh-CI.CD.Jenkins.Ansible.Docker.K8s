@@ -10,22 +10,21 @@
     apt: name=docker.io state=present
   
   - name: insatll minikube
-    shell: curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \ && chmod +x minikube
-    # get_url:
-    #   url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64\
-    #     && chmod +x minikube
-    #   dest: /usr/local/bin
+    get_url:
+      url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+      dest: /usr/local/bin/minikube
+      mode: 0777
   
   # - name: give executable permission
   #   shell:  chmod +x minikube
 
-  # - name: insatll kubectl
-  #   get_url:
-  #     url: https://storage.googleapis.com/kubernetes-release/release/v1.17.0/bin/linux/amd64/kubectl
-  #     dest: /usr/local/bin
+  - name: insatll kubectl
+    get_url:
+      url: https://storage.googleapis.com/kubernetes-release/release/v1.17.0/bin/linux/amd64/kubectl
+      dest: /usr/local/bin
 
   # - name: give executable permission
   #   shell: chmod +x ~/kubectl
   
   - name: start cluster
-    shell: ./minikube start
+    shell:  /usr/local/bin/minikube start
