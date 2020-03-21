@@ -12,7 +12,7 @@
   - name: insatll minikube
     get_url:
       url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-      dest: ~/usr/local
+      dest: /usr/local/bin
   
   # - name: give executable permission
   #   shell:  chmod +x minikube
@@ -20,7 +20,7 @@
   - name: insatll kubectl
     get_url:
       url: https://storage.googleapis.com/kubernetes-release/release/v1.17.0/bin/linux/amd64/kubectl
-      dest: ~/usr/local
+      dest: /usr/local/bin
 
   # - name: give executable permission
   #   shell: chmod +x ~/kubectl
