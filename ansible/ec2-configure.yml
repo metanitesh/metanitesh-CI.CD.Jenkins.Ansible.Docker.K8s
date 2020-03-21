@@ -11,7 +11,7 @@
   
   - name: insatll minikube
     get_url:
-      url: curl -Lo minikube https%3A//storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+      url: curl -Lo minikube 'https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64'
       dest: ~/
   
   - name: give executable permission
