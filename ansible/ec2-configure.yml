@@ -12,15 +12,18 @@
   - name: insatll minikube
     get_url:
       url: curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+      dest: ~/
   
   - name: give executable permission
     shell:  chmod +x minikube
 
   - name: insatll kubectl
-    shell: curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+    get_url:
+      url: curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+      dest: ~/
 
   - name: give executable permission
-    shell: chmod +x ./kubectl
+    shell: chmod +x ~/kubectl
   
   - name: start cluster
-    shell:  ./minikube start
+    shell:  ~/minikube start
