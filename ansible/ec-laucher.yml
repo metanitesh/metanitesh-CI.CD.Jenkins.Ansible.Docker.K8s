@@ -8,6 +8,10 @@
       key_name: that-one
       instance_type: t2.medium
       image: ami-0ca853d5eda656374
+      user_data: |
+               #!/bin/sh
+               sudo apt-get update
+               sudo apt-get install python
       region: us-west-2
       wait: yes
       group: launch-wizard-3
