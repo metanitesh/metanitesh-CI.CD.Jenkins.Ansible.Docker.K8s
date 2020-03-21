@@ -11,7 +11,7 @@
       user_data: |
                #!/bin/sh
                sudo apt-get update
-               sudo apt-get install python
+               sudo apt-get install python --yes
       region: us-west-2
       wait: yes
       group: launch-wizard-3
