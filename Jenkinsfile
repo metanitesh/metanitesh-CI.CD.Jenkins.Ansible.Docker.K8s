@@ -6,7 +6,5 @@ pipeline {
             echo 'hello'
       }
     }
-  }
-    
-    
+  }  
 }

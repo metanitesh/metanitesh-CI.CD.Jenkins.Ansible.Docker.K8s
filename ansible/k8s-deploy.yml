@@ -1,0 +1,12 @@
+- name: Deploy kubernetes
+  hosts: server
+  gather_facts: True
+  become: true
+  tasks:
+  - git:
+    repo: https://github.com/metanitesh/metanitesh-CI.CD.Jenkins.Ansible.Docker.K8s.git
+    dest: /repo
+    version: green-deployment
+  
+  - name: deploy a cluster
+    shell:  kubectl apply -f k8s/deployment.yml
