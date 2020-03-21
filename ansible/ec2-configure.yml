@@ -26,4 +26,4 @@
   #   shell: chmod +x ~/kubectl
   
   - name: start cluster
-    shell:  ~/minikube start
+    shell:  minikube start
