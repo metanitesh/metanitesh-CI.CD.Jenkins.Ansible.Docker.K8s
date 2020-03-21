@@ -4,10 +4,10 @@
   become: true
   tasks:
   - name: git
-    dnf: name=git state=present
+    apt: name=git state=present
   
   - name: docker
-    dnf: name=docker.io state=present
+    apt: name=docker.io state=present
   
   # - name: insatll minikube
   #   get_url:
