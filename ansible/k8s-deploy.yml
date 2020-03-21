@@ -5,8 +5,14 @@
   tasks:
   - git:
     repo: https://github.com/metanitesh/metanitesh-CI.CD.Jenkins.Ansible.Docker.K8s.git
-    dest: /repo
+    dest: /home/ubuntu
     version: green-deployment
   
   - name: deploy a cluster
-    shell:  kubectl apply -f k8s/deployment.yml
+    shell:  kubectl apply -f /home/ubuntu/k8s/deployment.yml
+
+  - name: deploy a cluster
+    shell:  kubectl apply -f /home/ubuntu/k8s/service.yml
+
+  - name: port-forward
+    shell: port-forward service/simple-api 3000:3000
