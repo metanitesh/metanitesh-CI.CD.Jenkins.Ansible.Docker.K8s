@@ -14,6 +14,11 @@
   - name: apply service
     shell:  kubectl apply -f /home/ubuntu/repo/k8s/service.yml
 
+  - name: wait for pods to up
+    wait_for: 
+      delay: 90 
+      timeout: 0 
+
   - name: port-forward
     shell: kubectl port-forward --address 0.0.0.0 service/simple-api 3000:3000
     async: 2592000
