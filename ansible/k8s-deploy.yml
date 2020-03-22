@@ -15,6 +15,5 @@
     shell:  kubectl apply -f /home/ubuntu/repo/k8s/service.yml
 
   - name: port-forward
-    shell: kubectl port-forward --address 0.0.0.0 service/simple-api 3000:3000
-    async: 2592000
-    poll: 0
+    shell: nohup kubectl port-forward --address 0.0.0.0 service/simple-api 3000:3000 2>&1 &
+    
