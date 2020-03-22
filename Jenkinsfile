@@ -4,7 +4,7 @@ pipeline {
     stage('start') {
       steps {
         echo 'hello'
-        sh 'ansible-playbook ./ansible/ec2-laucher.yml'
+        sh 'sudo ansible-playbook ./ansible/ec2-laucher.yml'
       }
     }
 
