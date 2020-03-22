@@ -11,7 +11,7 @@ pipeline {
           sh 'cat ansible/inventory'
         }
         
-        sh 'ls -la /home/ubuntu/private-key.pem'
+        sh 'ls -la /home/ubuntu/'
         sh 'cat ansible/inventory'
         sh 'ansible-playbook -i ./ansible/inventory -v ./ansible/ec2-configure.yml'
         sh 'ansible-playbook -i ./ansible/inventory -v ./ansible/k8s-deploy.yml'
