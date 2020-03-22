@@ -1,0 +1,38 @@
+- name: ec2 laucher
+  hosts: localhost
+  become: true
+  connection: local
+  tasks:
+  - name: lanching ec2
+    ec2:
+      key_name: that-one
+      instance_type: t2.medium
+      image: ami-0d1cd67c26f5fca19
+      user_data: |
+               #!/bin/sh
+               sudo apt-get update
+               sudo apt-get install python --yes
+      region: us-west-2
+      wait: yes
+      group: simple-api
+      count: 1
+      vpc_subnet_id: subnet-c90f0cb0
+      assign_public_ip: yes
+      instance_tags:
+       Type: blue-deployment
+       Name: blue-deployment
+    register: ec2
+    
+  - name: Create inventory file with ec2 url
+    template: 
+      src: ./inventory-template.j2
+      dest: ./inventory
+    vars:
+      url: ={{ item.public_ip }}
+    with_items: '{{ec2.instances}}'
+  
+  - name: Wait for SSH to come up
+    wait_for: host={{ item.public_dns_name }} port=22 delay=60 timeout=320 state=started
+    with_items: '{{ec2.instances}}'
+  
+

@@ -1,2 +1,4 @@
 node_modules/*
 ansible/.DS_Store
+ansible/testAnsbile.yml
+ansible/inventory
