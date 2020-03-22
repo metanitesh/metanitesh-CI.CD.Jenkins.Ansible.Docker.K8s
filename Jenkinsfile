@@ -56,7 +56,7 @@ pipeline {
     }
 
 
-    stage('Create infrastructure') {
+    stage('Building AWS infrastructure') {
       steps {
         withCredentials(bindings: [[ $class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'Aws-Capstone', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
           sh "echo this is ${env.AWS_ACCESS_KEY_ID}"
@@ -81,9 +81,9 @@ pipeline {
       }
     }
 
-    stage('deploy kubernetes cluster') {
+    stage('deploying app containers on kubernetes') {
       steps {
-        sh 'ansible-playbook -i ./ansible/inventory -v ./ansible/ec2-configure.yml'
+        sh 'ansible-playbook -i ./ansible/inventory -v ./ansible/k8s-deploy.yml'
       }
     }
 
