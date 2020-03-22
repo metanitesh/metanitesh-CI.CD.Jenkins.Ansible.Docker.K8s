@@ -1,25 +1,9 @@
 pipeline {
   agent any
-  environment {
-    registry = 'metanitesh/simple-api'
-    registryCredential = 'dockerId'
-    dockerImage = ''
-  }
   stages {
     stage('Install packages') {
-      parallel {
-        stage('Install packages') {
-          steps {
-            sh 'npm install'
-          }
-        }
-
-        stage('error') {
-          steps {
-            echo 'hello'
-          }
-        }
-
+      steps {
+        sh 'npm install'
       }
     }
 
@@ -55,7 +39,6 @@ pipeline {
       }
     }
 
-
     stage('Building AWS infrastructure') {
       steps {
         withCredentials(bindings: [[ $class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'Aws-Capstone', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
@@ -65,13 +48,7 @@ pipeline {
           sh 'ls -la ansible'
           sh 'cat ansible/inventory'
         }
-        
-        // sh 'ls -la /home/ubuntu/'
-        // sh 'cat /home/ubuntu/that-one.pem'
-        // sh 'cat ansible/inventory'
-        
-        // sh 'ansible-playbook -i ./ansible/inventory -v ./ansible/k8s-deploy.yml'
-        
+
       }
     }
 
@@ -87,5 +64,10 @@ pipeline {
       }
     }
 
+  }
+  environment {
+    registry = 'metanitesh/simple-api'
+    registryCredential = 'dockerId'
+    dockerImage = ''
   }
 }
