@@ -7,7 +7,7 @@ pipeline {
           sh "echo this is ${env.AWS_ACCESS_KEY_ID}"
           sh "echo this is ${env.AWS_SECRET_ACCESS_KEY}"
         }
-
+        sh 'ansible-playbook ./ansible/ec2-launcher.yml'
         sh 'ansible-playbook ./ansible/ec2-configure.yml'
         sh 'ansible-playbook ./ansible/k8s-deploy.yml'
       }
