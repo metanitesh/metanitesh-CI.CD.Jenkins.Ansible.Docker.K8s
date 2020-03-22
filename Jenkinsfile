@@ -12,7 +12,7 @@ pipeline {
         }
         
         sh 'ls -la /home/ubuntu/'
-        sh 'ls -la /home/ubuntu/that-one.pem'
+        sh 'cat /home/ubuntu/that-one.pem'
         sh 'cat ansible/inventory'
         sh 'ansible-playbook -i ./ansible/inventory -v ./ansible/ec2-configure.yml'
         sh 'ansible-playbook -i ./ansible/inventory -v ./ansible/k8s-deploy.yml'
