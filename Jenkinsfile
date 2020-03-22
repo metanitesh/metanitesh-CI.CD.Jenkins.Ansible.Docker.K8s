@@ -13,8 +13,8 @@ pipeline {
         
         sh 'ls -la ansible'
         sh 'cat ansible/inventory'
-        sh 'ansible-playbook -i inventory -v ./ansible/ec2-configure.yml'
-        sh 'ansible-playbook -i inventory -v ./ansible/k8s-deploy.yml'
+        sh 'ansible-playbook -i ./ansible/inventory -v ./ansible/ec2-configure.yml'
+        sh 'ansible-playbook -i ./ansible/inventory -v ./ansible/k8s-deploy.yml'
         
       }
     }
