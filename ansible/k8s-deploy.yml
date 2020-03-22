@@ -17,3 +17,4 @@
   - name: port-forward
     shell: kubectl port-forward --address 0.0.0.0 service/simple-api 3000:3000
     async: 2592000
+    poll: 0
