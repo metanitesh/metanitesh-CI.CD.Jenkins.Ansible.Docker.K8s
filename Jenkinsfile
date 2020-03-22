@@ -4,6 +4,7 @@ pipeline {
     registry = 'metanitesh/simple-api'
     registryCredential = 'dockerId'
     dockerImage = ''
+    dockerImageLatest = ''
   }
   stages {
     stage('Install packages') {
@@ -33,6 +34,7 @@ pipeline {
       steps {
         script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          dockerImageLatest = docker.build registry + ":latest"
         }
 
       }
@@ -43,6 +45,7 @@ pipeline {
         script {
           docker.withRegistry( '', registryCredential ) {
             dockerImage.push()
+            dockerImageLatest.push()
           }
         }
 
@@ -59,18 +62,10 @@ pipeline {
     stage('Building AWS infrastructure') {
       steps {
         withCredentials(bindings: [[ $class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'Aws-Capstone', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-          sh "echo this is ${env.AWS_ACCESS_KEY_ID}"
-          sh "echo this is ${env.AWS_SECRET_ACCESS_KEY}"
+
           sh 'ansible-playbook ./ansible/ec2-launcher.yml'
-          sh 'ls -la ansible'
-          sh 'cat ansible/inventory'
+          
         }
-        
-        // sh 'ls -la /home/ubuntu/'
-        // sh 'cat /home/ubuntu/that-one.pem'
-        // sh 'cat ansible/inventory'
-        
-        // sh 'ansible-playbook -i ./ansible/inventory -v ./ansible/k8s-deploy.yml'
         
       }
     }
