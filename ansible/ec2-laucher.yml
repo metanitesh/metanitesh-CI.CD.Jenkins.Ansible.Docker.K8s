@@ -1,6 +1,6 @@
 - name: ec2 laucher
   hosts: localhost
-  become: true
+  become: false
   connection: local
   tasks:
   - name: lanching ec2
