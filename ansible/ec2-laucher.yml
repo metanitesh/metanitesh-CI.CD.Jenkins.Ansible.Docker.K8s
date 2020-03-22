@@ -6,6 +6,8 @@
   - name: lanching ec2
     ec2:
       key_name: that-one
+      aws_access_key: "{{ lookup('env', 'AWS_ACCESS_KEY') }}"
+      aws_secret_key: "{{ lookup('env', 'AWS_SECRET_KEY') }}"
       instance_type: t2.medium
       image: ami-0d1cd67c26f5fca19
       user_data: |
