@@ -9,7 +9,8 @@ pipeline {
           // sh 'ansible-playbook ./ansible/ec2-launcher.yml'
         }
         
-        sh 'ls -la'
+        sh 'ls -la ansible'
+        sh 'cat ansible/inventory'
         // sh 'ansible-playbook ./ansible/k8s-deploy.yml'
       }
     }
