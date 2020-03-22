@@ -19,7 +19,7 @@ pipeline {
       }
     }  
 
-    stage ('deploy'){
+    stage ('deploy kubernetes'){
       step {
         sh "ansible-playbook ./ansible/k8s-deploy.yml"
       }
