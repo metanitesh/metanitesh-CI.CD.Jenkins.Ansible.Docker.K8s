@@ -9,8 +9,10 @@ pipeline {
                 // sh "ansible-playbook ./ansible/ec2-laucher.yml"
             }
         }
-      }
-    
+      }  
+
+    }
+
     stage ('configure infrastructure'){
       step {
         sh "ansible-playbook ./ansible/ec2-configure.yml"
@@ -21,7 +23,5 @@ pipeline {
       step {
         sh "ansible-playbook ./ansible/k8s-deploy.yml"
       }
-    }  
-
     }
   }
