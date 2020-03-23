@@ -1,27 +1,9 @@
 pipeline {
   agent any
-  environment {
-    registry = 'metanitesh/simple-api'
-    registryCredential = 'dockerId'
-    dockerImage = ''
-    dockerImageLatest= ''
-    
-  }
   stages {
     stage('Install packages') {
-      parallel {
-        stage('Install packages') {
-          steps {
-            sh 'npm install'
-          }
-        }
-
-        stage('error') {
-          steps {
-            echo 'hello'
-          }
-        }
-
+      steps {
+        sh 'npm install'
       }
     }
 
@@ -59,15 +41,12 @@ pipeline {
       }
     }
 
-
     stage('Building AWS infrastructure') {
       steps {
         withCredentials(bindings: [[ $class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'Aws-Capstone', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-
           sh 'ansible-playbook ./ansible/ec2-launcher.yml'
-          
         }
-        
+
       }
     }
 
@@ -83,5 +62,11 @@ pipeline {
       }
     }
 
+  }
+  environment {
+    registry = 'metanitesh/simple-api'
+    registryCredential = 'dockerId'
+    dockerImage = ''
+    dockerImageLatest = ''
   }
 }
