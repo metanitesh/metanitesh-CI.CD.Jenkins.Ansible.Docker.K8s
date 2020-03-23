@@ -16,7 +16,7 @@
 
   - name: wait for pods to up
     wait_for: 
-      delay: 90 
+      delay: 30 
       timeout: 0 
 
   - name: port-forward
