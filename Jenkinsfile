@@ -4,6 +4,7 @@ pipeline {
     registry = 'metanitesh/simple-api'
     registryCredential = 'dockerId'
     dockerImage = ''
+    dockerImageLatest= ''
     
   }
   stages {
@@ -34,6 +35,7 @@ pipeline {
       steps {
         script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          dockerImageLatest = docker.build registry + ":latest"
         }
 
       }
@@ -44,6 +46,7 @@ pipeline {
         script {
           docker.withRegistry( '', registryCredential ) {
             dockerImage.push()
+            dockerImageLatest.push()
           }
         }
 
