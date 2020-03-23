@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-app.get('/', (req, res) => res.send('Hello, Green deployment! <br><br> <a href="/courses">courses</a>'));
+app.get('/', (req, res) => res.send('Hello world, <br><br> <a href="/courses">courses</a>'));
 app.get('/courses', (req, res) => res.json([{
     id:1,
     name:'cloud-devops'
