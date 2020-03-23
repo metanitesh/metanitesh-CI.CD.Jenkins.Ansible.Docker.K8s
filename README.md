@@ -4,7 +4,7 @@ This project demonstrate a working CI/CD pipeline using Jenkins, Ansible, Docker
 To run this you will need to setup jenkins box, ansible, and cofigure credentials in jenkins ( aws/ ssh)
 
 ### Youtube link for walkthrough
-https://www.youtube.com/watch?v=WIGIzvWW0DY&feature=youtu.be
+https://www.youtube.com/watch?v=JkOg8Q6lYW8&feature=youtu.be
 
 ### Screenshot of working pipeline
 ![screeshot](https://github.com/metanitesh/metanitesh-CI.CD.Jenkins.Ansible.Docker.K8s/blob/master/screenshots/passing-pipeline.png "screeshot")
