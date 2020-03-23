@@ -4,12 +4,23 @@ pipeline {
     registry = 'metanitesh/simple-api'
     registryCredential = 'dockerId'
     dockerImage = ''
-    dockerImageLatest = ''
+    
   }
   stages {
     stage('Install packages') {
-      steps {
-        sh 'npm install'
+      parallel {
+        stage('Install packages') {
+          steps {
+            sh 'npm install'
+          }
+        }
+
+        stage('error') {
+          steps {
+            echo 'hello'
+          }
+        }
+
       }
     }
 
@@ -23,7 +34,6 @@ pipeline {
       steps {
         script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
-          dockerImageLatest = docker.build registry + ":latest"
         }
 
       }
@@ -34,7 +44,6 @@ pipeline {
         script {
           docker.withRegistry( '', registryCredential ) {
             dockerImage.push()
-            dockerImageLatest.push()
           }
         }
 
@@ -46,6 +55,7 @@ pipeline {
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
+
 
     stage('Building AWS infrastructure') {
       steps {
@@ -70,10 +80,5 @@ pipeline {
       }
     }
 
-  }
-  environment {
-    registry = 'metanitesh/simple-api'
-    registryCredential = 'dockerId'
-    dockerImage = ''
   }
 }
