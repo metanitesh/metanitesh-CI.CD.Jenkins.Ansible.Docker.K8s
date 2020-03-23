@@ -50,13 +50,13 @@ pipeline {
       }
     }
 
-    stage('configure kubernetes cluster') {
+    stage('Configure kubernetes cluster') {
       steps {
         sh 'ansible-playbook -i ./ansible/inventory -v ./ansible/ec2-configure.yml'
       }
     }
 
-    stage('deploying app containers on kubernetes') {
+    stage('Deploying app containers on kubernetes') {
       steps {
         sh 'ansible-playbook -i ./ansible/inventory -v ./ansible/k8s-deploy.yml'
       }
