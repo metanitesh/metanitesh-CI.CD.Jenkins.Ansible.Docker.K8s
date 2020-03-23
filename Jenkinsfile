@@ -69,9 +69,4 @@ pipeline {
     dockerImage = ''
     dockerImageLatest = ''
   }
-  environment {
-    registry = 'metanitesh/simple-api'
-    registryCredential = 'dockerId'
-    dockerImage = ''
-  }
 }
