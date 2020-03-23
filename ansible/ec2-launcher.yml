@@ -21,8 +21,8 @@
       vpc_subnet_id: subnet-c90f0cb0
       assign_public_ip: yes
       instance_tags:
-       Type: green-deployment
-       Name: green-deployment
+       Type: blue-deployment
+       Name: blue-deployment
     register: ec2
     
   - name: Create inventory file with ec2 url
